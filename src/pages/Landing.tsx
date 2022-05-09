@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react'
-
-import api from '../services/api'
-
 import { Navbar } from '../components/Navbar'
-
 import { Container, Home, Button, About } from '../styles/pages/Landing'
+import { useFetch } from '../hooks/useFetch'
 
 type githubProps = {
     id: number
@@ -12,13 +8,11 @@ type githubProps = {
 }
 
 export function Landing() {
-    const [repositories, setRepositories] = useState<githubProps>()
+    const { data } = useFetch<githubProps>(
+        'https://api.github.com/users/Brunomello-xD'
+    )
 
-    useEffect(() => {
-        api.get(`users/Brunomello-xD`).then(response => {
-            setRepositories(response.data)
-        })
-    }, [])
+    console.log(data)
 
     return (
         <Container>
@@ -27,7 +21,7 @@ export function Landing() {
                 <div className="max-width">
                     <div className="home-content">
                         <div className="text-1">Olá, meu nome é</div>
-                        <div className="text-2">{repositories?.name}</div>
+                        <div className="text-2">{data?.name}</div>
                         <div className="text-3">
                             Eu sou desenvolvedor
                             <span> front-end</span>
@@ -45,9 +39,7 @@ export function Landing() {
                 <div className="max-width">
                     <div className="about-content">
                         <h2 className="title">Sobre</h2>
-                        <div className="column left">
-                            <img src="" alt="" />
-                        </div>
+                        <div className="column left"></div>
                     </div>
                 </div>
             </About>

@@ -101,7 +101,6 @@ export const About = styled.section`
     .about-content .img .left {
         width: 400px;
         height: 400px;
-        background-color: #333;
     }
 
     .title {
