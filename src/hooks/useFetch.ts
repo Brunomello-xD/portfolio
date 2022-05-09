@@ -1,17 +1,34 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { AxiosRequestConfig } from 'axios'
+import api from '../services/api'
 
-export function useFetch<T = unknown>(url: string) {
+/**
+ * T = unknown = definindo que o T é desconhecido
+ */
+export function useFetch<T = unknown>(
+    url: string,
+    options?: AxiosRequestConfig
+) {
     /**
      * T | null = pode ser T ou null
      */
     const [data, setData] = useState<T | null>(null)
+    const [isFetching, setIsFetching] = useState(true)
+    const [error, setError] = useState<Error | null>(null)
 
     useEffect(() => {
-        axios.get(url).then(response => {
-            setData(response.data)
-        })
+        api.get(url, options)
+            .then(response => {
+                setData(response.data)
+            })
+            .catch(err => {
+                setError(err)
+            }) /**
+            finally = irá executar independente se a chamada der sucesso ou erro */
+            .finally(() => {
+                setIsFetching(false)
+            })
     }, [])
 
-    return { data }
+    return { data, error, isFetching }
 }
