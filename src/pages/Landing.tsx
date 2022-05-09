@@ -1,6 +1,9 @@
+import { useQuery } from 'react-query'
+
 import { Navbar } from '../components/Navbar'
 import { Container, Home, Button, About } from '../styles/pages/Landing'
-import { useFetch } from '../hooks/useFetch'
+
+import api from '../services/api'
 
 type githubProps = {
     id: number
@@ -8,8 +11,16 @@ type githubProps = {
 }
 
 export function Landing() {
-    const { data: repositories, isFetching } = useFetch<githubProps>(
-        '/users/Brunomello-xD'
+    const { data, isFetching } = useQuery<githubProps>(
+        'repos',
+        async () => {
+            const response = await api.get('/users/Brunomello-xD')
+
+            return response.data
+        },
+        {
+            staleTime: 1000 * 60 // 1 minuto
+        }
     )
 
     return (
@@ -20,7 +31,7 @@ export function Landing() {
                 <div className="max-width">
                     <div className="home-content">
                         <div className="text-1">Olá, meu nome é</div>
-                        <div className="text-2">{repositories?.name}</div>
+                        <div className="text-2">{data?.name}</div>
                         <div className="text-3">
                             Eu sou desenvolvedor
                             <span> front-end</span>
