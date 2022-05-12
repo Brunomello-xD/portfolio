@@ -8,6 +8,7 @@ import api from '../services/api'
 type githubProps = {
     id: number
     name: string
+    avatar_url: string
 }
 
 export function Landing() {
@@ -38,18 +39,44 @@ export function Landing() {
                         </div>
                         <br />
                         <br />
-                        <Button to="/">Contrate-me</Button>
+                        <Button to="/">
+                            <span>Contrate-me</span>
+                        </Button>
                     </div>
                 </div>
             </Home>
             {/**
-             * Sobre
+             * About
              */}
-            <About>
+            <About className="about" id="about">
                 <div className="max-width">
+                    <h2 className="title">Sobre</h2>
                     <div className="about-content">
-                        <h2 className="title">Sobre</h2>
-                        <div className="column left"></div>
+                        <div className="column left">
+                            <img src={data?.avatar_url} />
+                        </div>
+                        <div className="column right">
+                            <div className="text">
+                                Sou Bruno e sou desenvolvedor
+                                <span> front-end</span>
+                            </div>
+                            <p>
+                                Atualmente trabalho na Conexão Telecom, uma
+                                empresa de telecomunicações onde sou suporte
+                                técnico de campo onde desempenho as funções de
+                                ativador, manutenção e agendamento de visita
+                                técnica. Atualmente trabalho na Conexão Telecom,
+                                uma empresa de telecomunicações onde sou suporte
+                                técnico de campo onde desempenho as funções de
+                                ativador, manutenção e agendamento de visitas
+                                técnicas. Busco me tornar um programador
+                                front-end e atualmente venho estudando ReactJS,
+                                não tenho nenhuma experiência na área ainda mas
+                                a vontade e o desejo em sempre melhorar tenho de
+                                sobra.
+                            </p>
+                            <a href="#">Download CV</a>
+                        </div>
                     </div>
                 </div>
             </About>

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { lighten } from 'polished'
 
 type MenuProps = {
@@ -13,6 +13,7 @@ export const Nav = styled.div`
     justify-content: space-between;
     position: sticky;
 
+    z-index: 999;
     top: 0px;
     padding: 0 4rem;
 
@@ -60,8 +61,8 @@ export const MenuLink = styled(Link)`
     display: inline-block;
     position: relative;
     /**
-    1rem = top and bottom 
-    1.3rem = left and right 
+    * 1rem = top and bottom 
+    * 1.3rem = left and right 
     */
     padding: 1rem 1.3rem;
     cursor: pointer;
