@@ -30,10 +30,10 @@ export const Hamburguer = styled.div`
     cursor: pointer;
 
     span {
-        height: 2px;
+        height: 1px;
         width: 25px;
         background: #191927;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
         border-radius: 5px;
     }
 
@@ -70,7 +70,7 @@ export const MenuLink = styled(Link)`
 
     color: #191927;
 
-    font: 500 1rem Roboto, sans-serif;
+    font: 500 1rem monospace, sans-serif;
 
     transition: all 0.3s ease-in;
 
@@ -83,10 +83,19 @@ export const Logo = styled(Link)`
     padding: 1rem;
     color: #191927;
 
-    font: 700 1.6rem Roboto, sans-serif;
+    font: 700 1.6rem monospace, sans-serif;
 
     span {
-        font: 500 1.6rem Roboto, sans-serif;
+        font: 500 1.6rem monospace, sans-serif;
         color: #5aa9e6;
+    }
+
+    @media (max-width: 768px) {
+        font: 700 1.3rem monospace, sans-serif;
+
+        span {
+            font: 500 1.3rem monospace, sans-serif;
+            color: #5aa9e6;
+        }
     }
 `

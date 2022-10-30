@@ -1,46 +1,55 @@
-import { useQuery } from 'react-query'
+import { useEffect, useState } from 'react'
 
 import { Navbar } from '../components/Navbar'
-import { Container, Home, Button, About } from '../styles/pages/Landing'
+import { Container, Home, Button, About, CardContainer } from '../styles/pages/Landing'
 
 import api from '../services/api'
 
-type githubProps = {
+type UserData = {
     id: number
     name: string
     avatar_url: string
 }
 
-export function Landing() {
-    const { data, isFetching } = useQuery<githubProps>(
-        'repos',
-        async () => {
-            const response = await api.get('/users/Brunomello-xD')
+type Repository = {
+    full_name: string
+    description: string 
+}
 
-            return response.data
-        },
-        {
-            staleTime: 1000 * 60 // 1 minuto
-        }
-    )
+export function Landing() {
+    const [userData, setUserData] = useState<UserData>()
+    const [repositories, setRepositories] = useState<Repository[]>([])
+
+    useEffect(() => {
+        api.get('/users/Brunomello-xD').then(response => {
+            setUserData(response.data)
+        })
+    })
+
+    useEffect(() => {
+        api.get('/users/Brunomello-xD/repos').then(response => {
+            setRepositories(response.data)
+        })
+    })
 
     return (
         <Container>
-            {isFetching && <p>Carregando...</p>}
             <Navbar />
             <Home>
                 <div className="max-width">
                     <div className="home-content">
                         <div className="text-1">Olá, meu nome é</div>
-                        <div className="text-2">{data?.name}</div>
+                        <div className="text-2">{userData?.name}</div>
                         <div className="text-3">
                             Eu sou desenvolvedor
                             <span> front-end</span>
                         </div>
                         <br />
                         <br />
-                        <Button to="/">
-                            <span>Contrate-me</span>
+                        <Button>
+                            <div className='typing-demo'>
+                                #Contrate-me
+                            </div>
                         </Button>
                     </div>
                 </div>
@@ -53,7 +62,7 @@ export function Landing() {
                     <h2 className="title">Sobre</h2>
                     <div className="about-content">
                         <div className="column left">
-                            <img src={data?.avatar_url} />
+                            <img src={userData?.avatar_url} />
                         </div>
                         <div className="column right">
                             <div className="text">
@@ -61,25 +70,25 @@ export function Landing() {
                                 <span> front-end</span>
                             </div>
                             <p>
-                                Atualmente trabalho na Conexão Telecom, uma
-                                empresa de telecomunicações onde sou suporte
-                                técnico de campo onde desempenho as funções de
-                                ativador, manutenção e agendamento de visita
-                                técnica. Atualmente trabalho na Conexão Telecom,
-                                uma empresa de telecomunicações onde sou suporte
-                                técnico de campo onde desempenho as funções de
-                                ativador, manutenção e agendamento de visitas
-                                técnicas. Busco me tornar um programador
-                                front-end e atualmente venho estudando ReactJS,
-                                não tenho nenhuma experiência na área ainda mas
-                                a vontade e o desejo em sempre melhorar tenho de
-                                sobra.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                             </p>
                             <a href="#">Download CV</a>
                         </div>
                     </div>
                 </div>
-            </About>
+            </About>  
+
+            <CardContainer> 
+                {repositories.map(repo => {
+                    return( 
+                        <div className='card'>
+                            <h2 className='title'>{repo.full_name}</h2>
+
+                            <p className='description'>{repo.description}</p>
+                        </div>
+                    )
+                })}
+            </CardContainer>
         </Container>
     )
 }

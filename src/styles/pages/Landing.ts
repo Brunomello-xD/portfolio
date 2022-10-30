@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 
@@ -9,6 +8,7 @@ export const Container = styled.div`
 export const Home = styled.section`
     display: flex;
     height: 100vh;
+    /* width: 100vw; */
     min-height: 500px;
 
     .max-width {
@@ -16,43 +16,43 @@ export const Home = styled.section`
     }
 
     .home-content .text-1 {
-        font: 27px Roboto, sans-serif;
+        font: 27px monospace, sans-serif;
         color: #191927;
     }
     .home-content .text-2 {
-        font: 700 75px Roboto, sans-serif;
+        font: 600 75px monospace, sans-serif;
         color: #191927;
 
         margin-left: -3px;
     }
     .home-content .text-3 {
-        font: 40px Roboto, sans-serif;
+        font: 40px monospace, sans-serif;
         color: #191927;
 
         margin: 5px 0;
     }
     .home-content .text-3 span {
         color: #5aa9e6;
-        font: 700 40px Roboto, sans-serif;
+        font: 700 40px monospace, sans-serif;
     }
 
     @media (max-width: 768px) {
         padding: 0 1rem;
 
         .home-content .text-1 {
-            font: 20px Roboto, sans-serif;
+            font: 20px monospace, sans-serif;
         }
         .home-content .text-2 {
-            font: 700 55px Roboto, sans-serif;
+            font: 700 55px monospace, sans-serif;
             margin-left: -3px;
         }
         .home-content .text-3 {
-            font: 30px Roboto, sans-serif;
+            font: 30px monospace, sans-serif;
             margin: 5px 0;
         }
         .home-content .text-3 span {
             color: #5aa9e6;
-            font: 700 30px Roboto, sans-serif;
+            font: 700 30px monospace, sans-serif;
         }
     }
 
@@ -60,67 +60,61 @@ export const Home = styled.section`
         padding: 0 1rem;
 
         .home-content .text-1 {
-            font: 18px Roboto, sans-serif;
+            font: 18px monospace, sans-serif;
         }
         .home-content .text-2 {
-            font: 700 50px Roboto, sans-serif;
+            font: 700 50px monospace, sans-serif;
             margin-left: -3px;
         }
         .home-content .text-3 {
-            font: 28px Roboto, sans-serif;
+            font: 28px monospace, sans-serif;
             margin: 5px 0;
         }
         .home-content .text-3 span {
             color: #5aa9e6;
-            font: 700 30px Roboto, sans-serif;
+            font: 700 30px monospace, sans-serif;
         }
     }
 `
-export const Button = styled(Link)`
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    color: #191927;
-    text-decoration: none;
-    padding: 15px 30px;
-    border: 2px solid #191927;
-    border-radius: 5px;
-    font: 500 25px Roboto, sans-serif;
 
-    &::before {
-        content: '#';
-        display: inline-block;
-        width: 0.75em;
-
+export const Button = styled.div`
+    .typing-demo {
+        width: 22ch ;
+        animation: typing 2s steps(22),
+        blink .5s step-end infinite alternate ;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid;
+        font-family: monospace;
+        font-size: 3em;
         color: #191927;
-
-        opacity: 0;
-        transition: opacity 300ms;
     }
 
-    &:hover {
-        transform: none;
-        animation: pulsate 0.9s ease-in-out;
+    @keyframes typing {
+        from {
+            width: 0;
+        }   
     }
 
-    &:hover::before {
-        opacity: 1;
-        color: ${lighten(0.3, '#1b1b1b')};
+    @keyframes blink {
+        50% {
+            border-color: transparent;
+        } 
     }
 
     @media (max-width: 768px) {
         padding: 10px 25px;
-        font: 500 20px Roboto, sans-serif;
+        font: 500 10px monospace;
     }
 
     @media (max-width: 576px) {
         padding: 8px 20px;
-        font: 500 18px Roboto, sans-serif;
+        font: 500 8px monospace;
     }
 `
 export const About = styled.section`
     padding: 100px;
-    font-family: Roboto, sans-serif;
+    font-family: monospace, sans-serif;
 
     .about-content {
         display: flex;
@@ -184,18 +178,19 @@ export const About = styled.section`
     .about-content .right p {
         text-align: justify;
         color: #191927;
+        margin-bottom: 20px;
     }
 
     .about-content .right a {
         display: inline-block;
-        background: #5aa9e6;
+        background: #191927;
         color: #f9f9f9;
         font-size: 20px;
         font-weight: 500;
-        padding: 10px 30px;
+        padding: 12px 32px;
         margin-top: 20px;
-        border-radius: 6px;
-        border: 2px solid #5aa9e6;
+        /* border-radius: 6px; */
+        border: 2px solid #191927;
         transition: all 0.3s ease;
     }
 
@@ -204,7 +199,7 @@ export const About = styled.section`
     }
 
     .about-content .right a:hover {
-        color: #5aa9e6;
+        color: #191927;
         background: none;
     }
 
@@ -246,5 +241,67 @@ export const About = styled.section`
             width: 250px;
             height: 250px;
         }
+    }
+    
+`
+
+export const CardContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+    padding: 100px;
+
+    .card {
+        width: auto;
+        max-width: 300px;
+
+        height: 150px;
+
+        border-radius: 6px;
+        background: ${lighten(0.3, '#5aa9e6')};
+
+        padding: 1rem 0.8rem;
+    }
+
+    .title {
+        font: 25px monospace, sans-serif;
+        color: #191927;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        
+    }
+
+    .description {
+        font: 15px monospace, sans-serif;
+        color: #191927;
+        text-align: justify;
+        margin-top: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+
+        .title {
+            font: 20px monospace, sans-serif;
+        }
+
+        .description {
+            font: 18px monospace, sans-serif;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .title {
+            font: 18px monospace, sans-serif;
+        }
+
+        .description {
+            font: 16px monospace, sans-serif;
+        }
+        
     }
 `
