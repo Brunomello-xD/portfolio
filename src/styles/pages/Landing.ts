@@ -245,6 +245,43 @@ export const About = styled.section`
     
 `
 
+export const GitHubContainer = styled.div`
+    font-family: monospace, sans-serif;
+
+    .title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 500;
+        margin-bottom: 60px;
+        padding-bottom: 20px;
+        position: relative;
+        color: #191927;
+    }
+
+    .title::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 180px;
+        height: 3px;
+        background: #191927;
+        transform: translateX(-50%);
+    }
+
+    .title::after {
+        content: 'Repositories';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        font-size: 20px;
+        background: #fff;
+        color: #5aa9e6;
+        padding: 5px;
+        transform: translateX(-50%);
+    }
+`
+
 export const CardContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -253,23 +290,26 @@ export const CardContainer = styled.div`
     flex-wrap: wrap;
 
     gap: 10px;
-    padding: 100px;
+    padding: 0 100px;
 
     .card {
-        width: auto;
+        width: 300px;
         max-width: 300px;
-
         height: 150px;
 
         border-radius: 6px;
+        border-color: ${lighten(0.2, '#191927')};
+        border-collapse: separate; 
+        border-width: 1px;
+        border-style: solid;
         background: ${lighten(0.3, '#5aa9e6')};
 
         padding: 1rem 0.8rem;
     }
 
-    .title {
+    .titleCard {
         font: 25px monospace, sans-serif;
-        color: #191927;
+        color: ${lighten(0.1, '#191927')};
         text-overflow: ellipsis;
         overflow: hidden;
         
@@ -277,15 +317,15 @@ export const CardContainer = styled.div`
 
     .description {
         font: 15px monospace, sans-serif;
-        color: #191927;
-        text-align: justify;
+        color: ${lighten(0.2, '#191927')};
+        text-align: left;
         margin-top: 1.2rem;
     }
 
     @media (max-width: 600px) {
         flex-direction: column;
 
-        .title {
+        .titleCard {
             font: 20px monospace, sans-serif;
         }
 
@@ -295,12 +335,49 @@ export const CardContainer = styled.div`
     }
 
     @media (max-width: 576px) {
-        .title {
+        .titleCard {
             font: 18px monospace, sans-serif;
         }
 
         .description {
             font: 16px monospace, sans-serif;
+        }
+        
+    }
+`
+
+export const Contact = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+        font-size: 44px;
+        animation: float 5s ease-in-out infinite;
+    }
+    .whatsapp-ri {
+        color: #25D366;
+        animation-delay: 1s;
+    }
+    .linkedin-ri {
+        color: #0A66C2;
+        animation-delay: 2s;
+    }
+
+    .github-ri {
+        color: #333;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+        100% {
+            transform: translateY(0);
         }
         
     }
